@@ -1,0 +1,25 @@
+package lba_backend.config;
+
+public class test
+{
+	
+	private static int reverse(int n)
+	{
+		String temp=Integer.toBinaryString(n);
+		String reverse="";
+		for(int i=temp.length()-1;i>=0;i--)
+		{
+			reverse+=temp.charAt(i);
+		}
+		
+		return Integer.parseInt(reverse,2);
+	}
+
+	
+	public static void main(String args[])
+	{
+		int n=2;
+		reverse(n);
+	}
+
+}

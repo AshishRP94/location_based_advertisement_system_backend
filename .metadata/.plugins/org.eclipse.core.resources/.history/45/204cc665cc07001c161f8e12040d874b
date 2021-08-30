@@ -1,0 +1,69 @@
+package lba_backend.Services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import lba_backend.Dao.GeofenceDao;
+import lba_backend.Entities.Geofence;
+import lba_backend.Entities.User;
+
+public class GeofenceImp implements GeofenceInterface
+{
+	GeofenceDao geofencedao;
+
+	@Override
+	public String save(String shopname)
+	{
+		Optional<Geofence>temp=geofencedao.findById(shopname);
+		String status="";
+		if(temp.isEmpty()==true)
+		{
+			Geofence geofence=temp.get();
+			geofencedao.save(geofence);
+			status="sucessfully_saved";
+		}
+		else
+		{			
+			status="username_exists";
+		}
+		return status;
+	}
+	
+	
+	
+	@Override
+	public List<Geofence> getAllByUsername(String username)
+	{
+		
+		List<Geofence>tlist=geofencedao.findAllByUsername(username);
+		if(tlist.size()==0)
+		{
+			return null;			
+		}
+		else
+		{
+		    return tlist;
+		}
+	}
+
+	@Override
+	public String delete(String shopname)
+	{
+		
+		Optional<Geofence>temp=geofencedao.findById(shopname);
+		String status="";
+		if(temp.isEmpty()==false)
+		{
+			geofencedao.deleteById(shopname);
+			status="sucessfully_deleted";
+		}
+		else
+		{
+			status="username_does_not_exists";
+		}
+		
+		return status;
+	}
+	
+
+}

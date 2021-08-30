@@ -1,0 +1,13 @@
+package lba_backend.Entities;
+
+import java.util.ArrayList;
+
+import javax.persistence.Id;
+
+public class Prebook
+{
+	@Id
+	String username;
+	ArrayList<String>product;
+	
+}

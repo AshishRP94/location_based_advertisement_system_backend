@@ -1,0 +1,7 @@
+package lba_backend.Dao;
+
+public interface PrebookDao
+{
+	
+
+}

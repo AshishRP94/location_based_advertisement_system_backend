@@ -1,0 +1,65 @@
+package lba_backend.Services;
+
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import lba_backend.Dao.PrebookDao;
+import lba_backend.Entities.Prebook;
+
+
+@Service
+public class PrebookImp implements PrebookInterface
+{
+	
+	@Autowired
+	PrebookDao dao;
+	
+	@Override
+	public String save(Prebook prebook)
+	{
+		
+	String status="";
+	Optional<Prebook>temp=	dao.findById(prebook.getId());
+	if(temp.isEmpty()==true)
+	{
+		dao.save(prebook);
+		status="sucessfully_saved";
+	}
+	else
+	{
+		status="id_exists";
+	}
+		return status;
+	}
+
+	@Override
+	public List<Prebook> get(String username)
+	{
+		List<Prebook>result=dao.findAllByUsername(username);
+		if(result.size()==0)
+		{
+			return null;
+		}
+		else
+		{
+			return result;			
+		}
+	}
+	
+	@Override
+	public String delete(String username)
+	{
+		List<Prebook>result=dao.findAllByUsername(username);
+		if(result.size()==0)
+		{
+			return "username_not_exists";
+		}
+		else
+		{
+			dao.deleteAllByUsername(username);
+			return "successfully_deleted";
+		}
+	}
+	
+}

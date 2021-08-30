@@ -1,0 +1,8 @@
+package lba_backend.Email;
+
+public interface Notification
+{
+	public void sendOnSignup(String email);
+	public void sendoOnPrebook(String email,String product,Long amount);
+	public void deletePrebook(String email,String product,Long amount);
+}

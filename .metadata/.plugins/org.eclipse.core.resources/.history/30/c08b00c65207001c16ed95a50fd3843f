@@ -1,0 +1,12 @@
+package lba_backend.Services;
+
+import java.util.List;
+import lba_backend.Entities.User;
+
+public interface GeofenceInterface
+{
+	public String     save(String shopname);
+	public List<User> getAllByUsername(String username);
+	public String     delete(String shopname);
+	
+}

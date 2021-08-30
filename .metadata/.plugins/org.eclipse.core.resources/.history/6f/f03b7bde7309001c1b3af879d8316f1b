@@ -1,0 +1,75 @@
+package lba_backend.Email;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+
+public class EmailService implements Notification
+{
+	
+	@Autowired
+	JavaMailSender javamailsend;
+	
+	@Autowired
+	SimpleMailMessage mail; 
+
+
+	@Override
+	public void sendOnSignup(String email)
+	{
+		try
+		{
+			
+		mail.setTo(email);
+		mail.setSubject("Testing");
+		mail.setText("Welcome To Location Based Advertisement System");
+		javamailsend.send(mail);
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println(""+e);
+		}
+	}
+
+	@Override
+	public void sendoOnPrebook(String email, String product, Long amount)
+	{
+		
+		try
+		{
+			mail.setTo(email);
+		    mail.setSubject("Testing");
+		    mail.setText("This"+product+"has been sucessfully pre booked at"+amount+"rs");
+		    javamailsend.send(mail);
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println(""+e);
+		}
+
+	}
+
+	@Override
+	public void deletePrebook(String email, String product, Long amount)
+	{
+		try
+		{
+			mail.setTo(email);
+		    mail.setSubject("Testing");
+		    mail.setText("This"+product+"has been sucessfully deleted");
+		    javamailsend.send(mail);
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println(""+e);
+		}
+
+		
+		
+	}
+	
+
+}
